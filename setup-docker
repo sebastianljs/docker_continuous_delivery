@@ -1,4 +1,8 @@
 #! bin/env bash
+: '
+Dependencies:
+    - docker
+'
 set -eux
 sudo yum install docker -y
 sudo systemctl start docker.service

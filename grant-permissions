@@ -1,0 +1,8 @@
+#! bin/env bash
+: '
+Dependencies:
+    - docker
+'
+set -eux
+sudo usermod -a -G docker "$(whoami)"
+sudo usermod -a -G docker jenkins
