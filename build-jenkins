@@ -7,10 +7,10 @@ Dependencies:
 set -eux
 AWS_REGION='us-west-2'
 CALLER_ACCOUNT_ID=173790190677
+CONTAINER_NAME="hello-world:latest"
 docker run hello-world
 aws ecr get-login --no-include-email --region "$AWS_REGION" > ./login
 # shellcheck disable=SC1091
 source ./login
-CONTAINER_NAME="hello-world:latest"
 docker tag "$CONTAINER_NAME" "$CALLER_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$CONTAINER_NAME"
 docker push "$CALLER_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$CONTAINER_NAME"
