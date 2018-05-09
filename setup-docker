@@ -1,0 +1,6 @@
+#! bin/env bash
+set -eux
+sudo yum install docker -y
+sudo systemctl start docker.service
+sudo systemctl enable docker.service
+sudo usermod -a -G docker "$(whoami)"

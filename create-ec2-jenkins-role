@@ -1,0 +1,27 @@
+#! bin/env/bash
+: '
+dependencies:
+aws-cli
+'
+
+set -eux
+ROLE_NAME='ec2-jenkins-role'
+ROLE_POLICY_DOC='
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+aws iam create-role \
+	--role-name "$ROLE_NAME" \
+	--assume-role-policy-document "$ROLE_POLICY_DOC"
+aws iam attach-role-policy \
+	--policy-arn 'arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser' \
+	--role-name "$ROLE_NAME"
